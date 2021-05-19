@@ -80,7 +80,7 @@
           <div class="modal-footer">
             <input type="hidden" name="id" class="id" id="">  
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" id ="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" id="submit" class="btn btn-primary">Save changes</button>
           </div>
         </form>
         
@@ -101,11 +101,8 @@
       
       //read recipes
         $.getJSON("api/recipe/read.php", function(result){
-          console.log(result);
-           var output = '';
+          var output = '';
           $.each(result, function(key, val){
-            $("#dataName").text(val.recipe_name);
-            $(".edit").attr("id", val.id);
             output += '' +
                     '<div class="col-sm-3 border border-info rounded bg-light m-2 p-2">' +
                       '<h4>' + val.recipe_name + '</h4>' +
@@ -116,29 +113,28 @@
                     '</div>';
           });
           $(".row").html(output);
-
+          
           //read one recipe and update
           $(".edit").click(function(){
             // $('#button_action').val('Update');
             // $('.modal-title').text('Update Recipe');
             // $("#recipeModal").modal("show");
             var id = $(this).attr("id");
-            $.getJSON("api/recipe/read_single.php", {id}, function(result){
-              $(".id").val(result.id);
-              $("#updateRecipe").submit(function(event){
+            $(".id").val(id);
+
+                  
+                  
+          });
+          
+        });
+
+        $("#updateRecipe").submit(function(event){
                 event.preventDefault();
                 var serializedData = $("#updateRecipe").serialize();
                 $.post("api/recipe/update.php", serializedData);
                 alert("Recipe Updated");
                 $("#updateModal").modal('hide');
               });
-
-              
-            });
-            
-          });
-        });
-
       //read categories and output them in modal
       $.getJSON("api/categories/read.php", function(result){
         var output = '';
