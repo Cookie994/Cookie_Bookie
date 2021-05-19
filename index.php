@@ -15,7 +15,7 @@
     <div class="row"></div>
     </div>
   </div>
-  <!-- Modal for create form-->
+  <!-- Modal for insert form-->
   <div class="modal fade" id="recipeModal" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -42,48 +42,11 @@
             </div>
           </div>
           <div class="modal-footer">
+            <input type="hidden" name="id" id="id">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" id="button_action" class="btn btn-info">Create</button>
+            <input type="submit" id="button_action" class="btn btn-info" value="Create">
           </div>
         </form>
-        
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for update form -->
-  <div class="modal fade" id="updateModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Update Recipe</h5>
-        </div>
-        <form id="updateRecipe" name="updateRecipe" role="form">
-          <div class="modal-body">
-            <div class="form-group">
-                  <label>Name</label>
-                  <input id="uname" type="text" name="uname" class="form-control">
-              </div>
-              <div class="form-group">
-                  <label>Ingredients</label>
-                  <input id="uingredients" type="text" name="uingredients" class="form-control" placeholder="">
-              </div>
-              <div class="form-group">
-                  <label>Time</label>
-                  <input id="utime" type="text" name="utime" class="form-control">
-              </div>
-              <div class="form-group">
-                  <label>Category</label>
-                  <select name="ucategory" id="category" class="form-select"></select>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <input type="hidden" name="id" class="id" id="">  
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" id="submit" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
-        
       </div>
     </div>
   </div>
@@ -93,11 +56,11 @@
     
     $(document).ready(function(){
 
-      // $("#add_button").click(function(){
-      //   $('#button_action').val('Create');
-      //   $('.modal-title').text('Create Recipe');
-      //   $('#createRecipe')[0].reset();
-      // });
+      $("#add_button").click(function(){
+        $('#button_action').val('Create');
+        $('.modal-title').text('Create Recipe');
+        $('#createRecipe')[0].reset();
+      });
       
       //read recipes
         $.getJSON("api/recipe/read.php", function(result){
@@ -108,33 +71,28 @@
                       '<h4>' + val.recipe_name + '</h4>' +
                       '<p>' + val.ingredients + '</p>' +
                        '<p>Category: ' + val.category_name + '</p>' +
-                      '<button type="button" name="edit" class="btn btn-warning me-2 edit" id="' + val.id + '" data-bs-toggle="modal" data-bs-target="#updateModal">Edit</button>' +
+                      '<button type="button" name="edit" class="btn btn-warning me-2 edit" id="' + val.id + '">Edit</button>' +
                       '<button type="button" name="delete" class="btn btn-danger delete" id="' + val.id + '">Delete</button>' +
                     '</div>';
           });
           $(".row").html(output);
           
-          //read one recipe and update
+          //read one recipe
           $(".edit").click(function(){
-            // $('#button_action').val('Update');
-            // $('.modal-title').text('Update Recipe');
-            // $("#recipeModal").modal("show");
+            $('#button_action').val('Update');
+            $('.modal-title').text('Update Recipe');
+            $("#recipeModal").modal("show");
             var id = $(this).attr("id");
-            $(".id").val(id);
-
-                  
-                  
+            $("#id").val(id);
+            $.getJSON("api/recipe/read_single.php", {id}, function(result){
+              $("#name").val(result.recipe_name);
+              $("#ingredients").val(result.ingredients);
+              $("#time").val(result.time);
+              $("#category option:selected").text(result.category_name);
+            });      
           });
-          
         });
 
-        $("#updateRecipe").submit(function(event){
-                event.preventDefault();
-                var serializedData = $("#updateRecipe").serialize();
-                $.post("api/recipe/update.php", serializedData);
-                alert("Recipe Updated");
-                $("#updateModal").modal('hide');
-              });
       //read categories and output them in modal
       $.getJSON("api/categories/read.php", function(result){
         var output = '';
@@ -145,10 +103,10 @@
         $("#category").html(output);
       });
 
-      //Create recipes
+      //Create or update recipes
       $("#createRecipe").submit(function(event){
         event.preventDefault();
-        $.post("api/recipe/create.php", $("form").serialize());
+        $.post("api/recipe/insert.php", $("form").serialize());
         alert("Recipe created");
         $("#recipeModal").modal('hide');
       });

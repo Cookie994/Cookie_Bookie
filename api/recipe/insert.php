@@ -21,11 +21,20 @@
     //  var_dump($data);
 
     if(!empty($_POST)){
-        $recipe->recipe_name = $_POST['name'];
-        $recipe->ingredients = $_POST['ingredients'];
-        $recipe->time = $_POST['time'];
-        $recipe->category_id = $_POST['category'];
-        $recipe->create();
+        if($_POST['id'] != '' ){
+            $recipe->id = $_POST['id'];
+            $recipe->recipe_name = $_POST['name'];
+            $recipe->ingredients = $_POST['ingredients'];
+            $recipe->time = $_POST['time'];
+            $recipe->category_id = $_POST['category'];
+            $recipe->update();
+        } else {
+            $recipe->recipe_name = $_POST['name'];
+            $recipe->ingredients = $_POST['ingredients'];
+            $recipe->time = $_POST['time'];
+            $recipe->category_id = $_POST['category'];
+            $recipe->create();
+        }
     }
 
     
