@@ -8,13 +8,20 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="container">
-    <br>
-    <h3 align="center">Cookie Bookie</h3>
-    <button type="button" name="add_button" id="add_button" class="btn btn-success btn-xs mb-3" data-bs-toggle="modal" data-bs-target="#recipeModal">Add New Recipe</button>
-    <div class="row"></div>
-  </div>
-  </div>
+  <header class="p-3 mb-3 border-bottom">
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <h3 class="me-auto">Cookie Bookie</h3>
+        <button type="button" name="add_button" id="add_button" class="btn btn-success btn-xs" data-bs-toggle="modal" data-bs-target="#recipeModal">Add New Recipe</button>
+      </div>
+    </div>
+  </header>
+  <section>
+    <div class="container">
+      <img src="header_img.jpg" class="img-fluid rounded" alt="food">
+      <div class="row d-flex justify-content-center"></div>
+    </div>
+  </section>
   <!-- Modal for insert form-->
   <div class="modal fade" id="recipeModal" role="dialog">
     <div class="modal-dialog">
@@ -67,7 +74,7 @@
         var output = '';
         $.each(result, function(key, val){
           output += '' +
-                  '<div class="col-sm-3 border border-info rounded bg-light m-2 p-2">' +
+                  '<div class="col-8 col-sm-4 col-md-3 rounded bg-light m-2 p-2">' +
                     '<h4>' + val.recipe_name + '</h4>' +
                     '<p>' + val.ingredients + '</p>' +
                       '<p>Category: ' + val.category_name + '</p>' +
