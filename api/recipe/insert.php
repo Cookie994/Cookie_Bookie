@@ -18,7 +18,6 @@
     
     // //Get raw posted data
     //  $data = json_decode(file_get_contents("php://input"));
-    //  var_dump($data);
 
     if(!empty($_POST)){
         if($_POST['id'] != '' ){
@@ -37,12 +36,6 @@
         }
     }
 
-    
-    
-
-
-     
- 
     //  if($recipe->create()) {
     //      echo json_encode(
     //          array('message' => 'Recipe Created')

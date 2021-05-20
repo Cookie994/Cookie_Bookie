@@ -13,7 +13,7 @@
     <h3 align="center">Cookie Bookie</h3>
     <button type="button" name="add_button" id="add_button" class="btn btn-success btn-xs mb-3" data-bs-toggle="modal" data-bs-target="#recipeModal">Add New Recipe</button>
     <div class="row"></div>
-    </div>
+  </div>
   </div>
   <!-- Modal for insert form-->
   <div class="modal fade" id="recipeModal" role="dialog">
@@ -120,7 +120,11 @@
       $("#createRecipe").submit(function(event){
         event.preventDefault();
         $.post("api/recipe/insert.php", $("form").serialize());
-        alert("Recipe created");
+        if($("#button_action").val() == 'Update'){
+          alert("Recipe updated");
+        } else {
+          alert("Recipe created");
+        }
         $("#recipeModal").modal('hide');
       });
           

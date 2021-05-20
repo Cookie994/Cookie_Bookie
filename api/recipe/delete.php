@@ -2,7 +2,7 @@
     //headers
     header('Access-Control-Allow-Origin: *'); //public API
     header('Content-Type: application/json');
-    header('Access-Control-Allow-Methods: DELETE'); //DELETE method allowed
+    header('Access-Control-Allow-Methods: POST'); //POST method allowed
     //which headsers I'm allowing
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
