@@ -17,18 +17,21 @@
     $recipe = new Recipe($db);
     
     //Get raw posted data
-     $data = json_decode(file_get_contents("php://input"));
+    //  $data = json_decode(file_get_contents("php://input"));
 
      //Set ID to delete
-     $recipe->id = $data->id;
-
-     if($recipe->delete()) {
-         echo json_encode(
-             array('message' => 'Recipe Deleted')
-         );
-     } else {
-         echo json_encode(
-             array('message' => 'Recipe Not Deleted')
-         );
+     
+     if($_POST['id'] != '' ){
+        $recipe->id = $_POST['id'];
+        $recipe->delete();
      }
+    //  if($recipe->delete()) {
+    //      echo json_encode(
+    //          array('message' => 'Recipe Deleted')
+    //      );
+    //  } else {
+    //      echo json_encode(
+    //          array('message' => 'Recipe Not Deleted')
+    //      );
+    //  }
 ?>

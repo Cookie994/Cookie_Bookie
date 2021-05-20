@@ -63,35 +63,48 @@
       });
       
       //read recipes
-        $.getJSON("api/recipe/read.php", function(result){
-          var output = '';
-          $.each(result, function(key, val){
-            output += '' +
-                    '<div class="col-sm-3 border border-info rounded bg-light m-2 p-2">' +
-                      '<h4>' + val.recipe_name + '</h4>' +
-                      '<p>' + val.ingredients + '</p>' +
-                       '<p>Category: ' + val.category_name + '</p>' +
-                      '<button type="button" name="edit" class="btn btn-warning me-2 edit" id="' + val.id + '">Edit</button>' +
-                      '<button type="button" name="delete" class="btn btn-danger delete" id="' + val.id + '">Delete</button>' +
-                    '</div>';
-          });
-          $(".row").html(output);
-          
-          //read one recipe
-          $(".edit").click(function(){
-            $('#button_action').val('Update');
-            $('.modal-title').text('Update Recipe');
-            $("#recipeModal").modal("show");
-            var id = $(this).attr("id");
-            $("#id").val(id);
-            $.getJSON("api/recipe/read_single.php", {id}, function(result){
-              $("#name").val(result.recipe_name);
-              $("#ingredients").val(result.ingredients);
-              $("#time").val(result.time);
-              $("#category option:selected").text(result.category_name);
-            });      
-          });
+      $.getJSON("api/recipe/read.php", function(result){
+        var output = '';
+        $.each(result, function(key, val){
+          output += '' +
+                  '<div class="col-sm-3 border border-info rounded bg-light m-2 p-2">' +
+                    '<h4>' + val.recipe_name + '</h4>' +
+                    '<p>' + val.ingredients + '</p>' +
+                      '<p>Category: ' + val.category_name + '</p>' +
+                    '<button type="button" name="edit" class="btn btn-warning me-2 edit" id="' + val.id + '">Edit</button>' +
+                    '<button type="button" name="delete" class="btn btn-danger delete" id="' + val.id + '">Delete</button>' +
+                  '</div>';
         });
+        $(".row").html(output);
+        
+        //read one recipe
+        $(".edit").click(function(){
+          $('#button_action').val('Update');
+          $('.modal-title').text('Update Recipe');
+          $("#recipeModal").modal("show");
+          var id = $(this).attr("id");
+          $("#id").val(id);
+          $.getJSON("api/recipe/read_single.php", {id}, function(result){
+            $("#name").val(result.recipe_name);
+            $("#ingredients").val(result.ingredients);
+            $("#time").val(result.time);
+            $("#category option:selected").text(result.category_name);
+          });      
+        });
+
+        //delete recipe
+        $(".delete").click(function(){
+          var id = $(this).attr("id");
+          if(confirm("Delete this recipe?")){
+            $.post("api/recipe/delete.php", {id:id});
+          }
+        });
+
+        //refresh page after inserting/updating data or deleting
+        $("#button_action, .delete").click(function(){
+          location.reload(true);
+        });
+      });
 
       //read categories and output them in modal
       $.getJSON("api/categories/read.php", function(result){
