@@ -11,7 +11,7 @@
   <header class="p-3 mb-3 border-bottom">
     <div class="container">
       <div class="d-flex align-items-center">
-        <h3 class="me-auto">Cookie Bookie</h3>
+        <h2 class="me-auto">Cookie Bookie</h2>
         <button type="button" name="add_button" id="add_button" class="btn btn-success btn-xs" data-bs-toggle="modal" data-bs-target="#recipeModal">Add New Recipe</button>
       </div>
     </div>
@@ -19,7 +19,7 @@
   <section>
     <div class="container">
       <img src="header_img.jpg" class="img-fluid rounded" alt="food">
-      <div class="row d-flex justify-content-center"></div>
+      <div class="row d-flex justify-content-center mt-2 mt-md-4"></div>
     </div>
   </section>
   <!-- Modal for insert form-->
@@ -74,10 +74,10 @@
         var output = '';
         $.each(result, function(key, val){
           output += '' +
-                  '<div class="col-8 col-sm-4 col-md-3 rounded bg-light m-2 p-2">' +
+                  '<div class="col-7 col-sm-5 col-lg-3 rounded bg-light m-2 p-2 text-center">' +
                     '<h4>' + val.recipe_name + '</h4>' +
                     '<p>' + val.ingredients + '</p>' +
-                      '<p>Category: ' + val.category_name + '</p>' +
+                    '<p>Category: ' + val.category_name + '</p>' +
                     '<button type="button" name="edit" class="btn btn-warning me-2 edit" id="' + val.id + '">Edit</button>' +
                     '<button type="button" name="delete" class="btn btn-danger delete" id="' + val.id + '">Delete</button>' +
                   '</div>';
