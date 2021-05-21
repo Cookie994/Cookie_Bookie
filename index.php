@@ -95,7 +95,7 @@
             $("#name").val(result.recipe_name);
             $("#ingredients").val(result.ingredients);
             $("#time").val(result.time);
-            $("#category option:selected").text(result.category_name);
+            $("#category option[value='" + result.category_id + "']").attr('selected', 'selected');
           });      
         });
 
@@ -134,7 +134,7 @@
         }
         $("#recipeModal").modal('hide');
       });
-          
+
      });
   </script>
 </body>

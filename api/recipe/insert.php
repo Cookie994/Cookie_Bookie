@@ -1,7 +1,7 @@
 <?php
     //headers
     header('Access-Control-Allow-Origin: *'); //public API
-    header('Content-Type: application/json');
+    header('Content-Type: application/x-www-form-urlencoded');
     header('Access-Control-Allow-Methods: POST'); //POST method allowed
     //which headers I'm allowing
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
