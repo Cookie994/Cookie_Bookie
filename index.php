@@ -18,11 +18,15 @@
     </div>
   </header>
   <section>
-    <div class="container">
-      <form>
-        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+  <div class="container" id="headImg">
+      <form id="searchbox">
+        <input type="search" class="form-control shadow" id="search" placeholder="Search recipe">
       </form>
       <img src="style/img/header_img.jpg" class="img-fluid rounded" alt="food">
+    </div>
+  </section>
+  <section>
+    <div class="container">
       <div class="row d-flex justify-content-center mt-2 mt-md-4"></div>
     </div>
   </section>
@@ -66,6 +70,20 @@
 
     
     $(document).ready(function(){
+
+      //search for specific name/category
+      $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".row #recipe").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+      });
+
+      $("#search").keyup(function(e){
+        if(e.keyCode == 8){
+          $(".row #recipe").show();
+        }
+      });
 
       $("#add_button").click(function(){
         $('#button_action').val('Create');
