@@ -19,7 +19,7 @@
   </header>
   <section>
   <div class="container" id="headImg">
-      <form id="searchbox">
+      <form id="searchbox" autocomplete="off">
         <input type="search" class="form-control shadow" id="search" placeholder="Search recipe">
       </form>
       <img src="style/img/header_img.jpg" class="img-fluid rounded" alt="food">
@@ -37,7 +37,7 @@
         <div class="modal-header">
           <h5 class="modal-title">Create Recipe</h5>
         </div>
-        <form id="createRecipe" name="createRecipe" role="form">
+        <form id="createRecipe" name="createRecipe" role="form" autocomplete="off">
           <div class="modal-body d-grid gap-2">
             <div class="form-group">
                 <label>Name</label>
@@ -79,12 +79,14 @@
         });
       });
 
+      //show hidden recipes
       $("#search").keyup(function(e){
         if(e.keyCode == 8){
           $(".row #recipe").show();
         }
       });
 
+      //reset modal for create
       $("#add_button").click(function(){
         $('#button_action').val('Create');
         $('.modal-title').text('Create Recipe');
