@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Mate+SC&family=Playfair+Display&display=swap');
+
+h2, h4, h5, .btn, label {
+    font-family: 'Mate SC', serif;
+}
+
+p, input, select {
+    font-family: 'Playfair Display', serif;
+}
+
+#recipe, #recipeModal {
+    background-color: rgba(252, 235, 233, 0.4);
+}
+
+header {
+    background-image: url(img/header_bkg.jpg);
+}
+
+
+
+
